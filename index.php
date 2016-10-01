@@ -12,7 +12,7 @@
     
     if(!empty($_SESSION['core'])){
         echo "<script>
-        location.replace('http://dipandu.net/student.php');
+        location.replace('./student.php');
         </script>";
     }
 ?>

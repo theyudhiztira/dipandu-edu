@@ -83,13 +83,13 @@ function insertQueryDpd($dbname, $tableName, $fieldsName, $conn, $toInsert){
         }
         
         if(empty($toInsert)){
-            $insertRes=  "FAILED";
+            $insertRes=  "0";
         }else{
             $insertRes=  mysql_query($str,$conn) or die($conn);
             if($insertRes){
-                $insertRes=  "SUKSES";
+                $insertRes=  "1";
             }else{
-                $insertRes=  "FAILED";
+                $insertRes=  "0";
             }
         }
         
@@ -288,7 +288,7 @@ function session_check($accountType){
     if(empty($_SESSION['core'])){
         echo "<script>
         alert('You need to login first!');
-        location.replace('');
+        location.replace('./');
         </script>";
         session_destroy();
     }
@@ -297,7 +297,7 @@ function session_check($accountType){
         if($_SESSION['core']['account_type'] != $accountType){
             echo "<script>
             alert('You have no permission to access this page! We will redirect you to login page!');
-            location.replace('');
+            location.replace('./');
             </script>";
             session_destroy();
         }

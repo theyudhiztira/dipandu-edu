@@ -4,6 +4,6 @@
  */
 
 function openFile(filename){
-    location.replace('http://dipandu.net/'+filename+'.php');
+    location.replace('./'+filename+'.php');
 }
 

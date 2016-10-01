@@ -64,6 +64,22 @@ function post_response_text(tujuan,param,functiontoexecute)
     cxr.send(param);
 }
 
+function post_response_file_text(tujuan, file_param, file_data, text_data, functiontoexecute)
+{
+    var formdata = new FormData();
+    formdata.append(file_param, file_data);
+    
+    for(i = 0; i < text_data.length; i++){
+        var res_text_data = text_data[i].split("###");
+        formdata.append(res_text_data[0], res_text_data[1])
+    }
+    
+    cxr.open("POST", tujuan, true);
+    cxr.onreadystatechange = eval(functiontoexecute);
+    cxr.send(formdata);
+//    return;
+}
+
 function post_data(tujuan, param)
 {
     reload_on();

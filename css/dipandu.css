@@ -219,3 +219,9 @@ body{
         font-size: 12px;
     }
 }
+
+.elib-btn-upload{
+    height: 3rem;
+    line-height: 3rem;
+    margin-left: 0.7rem;
+}
