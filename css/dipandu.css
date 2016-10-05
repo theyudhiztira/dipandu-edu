@@ -179,12 +179,20 @@ body{
 
 @media only screen and (max-width: 991px){
     .library-view-icon{
+        display: none;
+    }
+    
+    .e-book_owner{
         display: none !important;
     }
 }
 
 @media only screen and (min-width: 992px){
     .library-view-icon{
+        display: inline-block;
+    }
+    
+    .e-book_owner{
         display: inline-block !important;
     }
 }
@@ -195,6 +203,9 @@ body{
     padding: 0px 0px 0px 10px; 
 }
 
+.input-field input.picker__holder{
+    padding: 0px 0px 0px 10px; 
+}
 
 .advanced-search-box{
     background-color: #FFF3E0;
@@ -224,4 +235,8 @@ body{
     height: 3rem;
     line-height: 3rem;
     margin-left: 0.7rem;
+}
+
+.hadir:hover{
+    cursor: pointer;
 }

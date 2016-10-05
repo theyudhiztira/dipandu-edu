@@ -12,8 +12,14 @@ $(document).ready(function(){
         menuWidth: 200
     });
     $('select').material_select();
+    
+    $('.datepicker').pickadate({
+    selectMonths: true,
+    selectYears: true// Creates a dropdown to control month
+  });
 });
 
 function logOut(){
     location.replace('logout.php');
 }
+

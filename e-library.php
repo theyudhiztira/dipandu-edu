@@ -70,7 +70,7 @@
         ?>
         <div class="row">
             <div class="col s12 m12 l12">
-                <a href="student.php" style="color: #FFF;"><b><i class="fa fa-caret-left"></i> Back To Home</b></a>
+                <a onclick="openFile('student')" style="color: #FFF;"><b><i class="fa fa-caret-left"></i> Back To Home</b></a>
             </div>
         </div>
         <div class="row">
@@ -96,6 +96,10 @@
                             </select>
                             <label>Subjects Name</label>
                         </div>
+                        <div class="col s12 m12 l12 input-field">
+                            <input type="text" id="titleName" onkeyup="searchByTitle('1')" />
+                            <label>Search By Title</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -118,7 +122,7 @@
                     </tbody>
                     <tfoot id="e-library-table-foot">
                         <tr>
-                            <td colspan="4" class="center-align center">
+                            <td colspan="4" class="center-align center" style="display: none !important;">
                                 <ul class="pagination" id="pageDisplay">
                                     <?php
                                         echo $pagination;

@@ -7,6 +7,12 @@
 
     require_once 'lib/dipandu.php';
     require_once $dependencies;
+    
+    $str_faculty=selectQueryDpd($dbname, "setup_faculty_list", "*", $conn, "ORDER BY `fak_short_name` ASC");
+    $faculty_option.="<option value=''>Faculty Option</option>";
+    while($res_faculty=mysql_fetch_assoc($str_faculty)){
+        $faculty_option.="<option value='".$res_faculty['fak_id']."'>".$res_faculty['fak_short_name']." - ".$res_faculty['fak_display_name']."</option>";
+    }
 ?>
 <html>
     <head>
@@ -24,12 +30,18 @@
             <div class="col s10 offset-s1 m4 offset-m4 l4 offset-l4 login-container">
                 <h5 class="center-align" style="color: #00695C !important;">Register Form</h5>
                 <div class="col s12 m12 l12 input-field">
-                    <select id="accountType">
-                        <option value="" disabled selected>Login as :</option>
+                    <select id="accountType" onchange="checkTeacher()">
+                        <option value="" disabled selected>Account Type</option>
                         <option value="2">Student</option>
                         <option value="3">Teacher</option>
                     </select>   
-                    <label>Account Type</label>
+                </div>
+                <div class="col s12 m12 l12 input-field" id="fakCon">
+                    <select id="faculty">
+                        <?php
+                            echo $faculty_option;
+                        ?>
+                    </select>   
                 </div>
                 <div class="col s12 m12 l12 input-field">
                     <input id="registration_number" type="text" class="validate" onchange="checkDouble('registration_number')">

@@ -8,7 +8,7 @@
     require_once 'lib/dipandu.php';
     require_once $dependencies;
     
-    session_check(3);
+    session_check(1);
     
 ?>
 <html>
@@ -19,28 +19,27 @@
         <meta charset="UTF-8">
         <title>DiPandu : <?php echo $_SESSION['core']['username']; ?></title>
     </head>
-    <body style="background-color: #3D5AFE;" onload="loadEverything()">
+    <body style="background-color: #3D5AFE;">
         <?php
         navigation_bar();
         ?>
         <div class="row">
-            <div class="col s12 l12 m12"><h5 id="kehadiran" style="margin-bottom: 20px; color: #FFF;"></h5></div>
             <div class="col s6 m3 l3 drawer-container">
-                <div class="drawer-box waves-effect waves-light" onclick="openFile('e-library_uploader')" style="background-color: #2ecc71;">
-                    <i class="fa fa-book drawer-icon"></i><br />
-                    <span class="drawer-caption">E-Library</span>
+                <div class="drawer-box waves-effect waves-light" onclick="openFile('setup_faculty')" style="background-color: #2ecc71;">
+                    <i class="fa fa-building drawer-icon"></i><br />
+                    <span class="drawer-caption">Faculty</span>
                 </div>
             </div>  
             <div class="col s6 m3 l3 drawer-container">
-                <div class="drawer-box waves-effect waves-light" onclick="openFile('teacher_schedule')" style="background-color: #e74c3c;">
-                    <i class="fa fa-list drawer-icon"></i><br />
+                <div class="drawer-box waves-effect waves-light" onclick="openFile('setup_session')" style="background-color: #e74c3c;">
+                    <i class="fa fa-clock-o drawer-icon"></i><br />
+                    <span class="drawer-caption">Session</span>
+                </div>
+            </div>  
+            <div class="col s6 m3 l3 drawer-container">
+                <div class="drawer-box waves-effect waves-light" onclick="openFile('setup_schedule')" style="background-color: #f1c40f;">
+                    <i class="fa fa-calendar-check-o drawer-icon"></i><br />
                     <span class="drawer-caption">Schedules</span>
-                </div>
-            </div>  
-            <div class="col s6 m3 l3 drawer-container">
-                <div class="drawer-box waves-effect waves-light" onclick="openFile('development')" style="background-color: #f1c40f;">
-                    <i class="fa fa-line-chart drawer-icon"></i><br />
-                    <span class="drawer-caption">Study Report</span>
                 </div>
             </div>  
             <div class="col s6 m3 l3 drawer-container">
@@ -49,35 +48,6 @@
                     <span class="drawer-caption">Task Cloud</span>
                 </div>
             </div>  
-        </div>
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <h5 style="color: #FFF;">Today Schedules</h5>
-                <table class="striped">
-                    <thead class="table-head">
-                        <tr>
-                            <td style="max-width: 482px !important;">No.</td>
-                            <td>Tanggal</td>
-                            <td>Subject</td>
-                            <td>Time</td>
-                            <td>Status</td>
-                            <td>Classroom</td>
-                        </tr>
-                    </thead>
-                    <tbody id="schedules-table">
-                    </tbody>
-                    <tfoot id="e-library-table-foot">
-                        <tr>
-                            <td colspan="9" class="center-align center" style="display: none !important;">
-                                <ul class="pagination" id="pageDisplay">
-                                    
-                                </ul>
-                            </td>
-                        </tr>
-                        
-                    </tfoot>
-                </table>
-            </div>
         </div>
         <div class="row">
             <div class="col s12 m12 l12" style="color: #FFF;">
@@ -104,6 +74,5 @@
     echo javaScriptCall();
     ?>
     <script type='text/javascript' src='js/main-local.js'></script>       
-    <script type='text/javascript' src='js/teacher.js'></script>  
     </body>
 </html>

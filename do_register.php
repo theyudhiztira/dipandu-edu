@@ -31,8 +31,8 @@ switch ($post['proc']){
     
     case 'signUp':
         if($_SESSION['generated_captcha'] == $post['captcha']){
-            $fieldsName="id, registration_number, fullname, username, password, email, level, register_date, verification_status, last_login";
-            $toInsert="NULL, '".$post['registration_number']."', '".$post['fullname']."', '".$post['username']."', md5('".$post['password']."'), '".$post['email']."', '".$post['account_type']."','".date("Y-m-d")."', 0, '".date("Y-m-d H:i:s")."'";
+            $fieldsName="id, registration_number, faculty_id, fullname, username, password, email, level, register_date, verification_status, last_login";
+            $toInsert="NULL, '".$post['registration_number']."', '".$post['faculty']."', '".$post['fullname']."', '".$post['username']."', md5('".$post['password']."'), '".$post['email']."', '".$post['account_type']."','".date("Y-m-d")."', 0, '".date("Y-m-d H:i:s")."'";
             $insert_query=insertQueryDpd($dbname, "core_user", $fieldsName, $conn, $toInsert);
             $result="1###Registration success, verification email sent!";
         }else{

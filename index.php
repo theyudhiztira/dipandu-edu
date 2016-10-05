@@ -11,9 +11,23 @@
     session_start();
     
     if(!empty($_SESSION['core'])){
-        echo "<script>
-        location.replace('./student.php');
-        </script>";
+        if($_SESSION['core']['account_type'] == '1'){
+            echo "<script>
+            location.replace('./admin.php');
+            </script>";
+        }
+        
+        if($_SESSION['core']['account_type'] == '2'){
+            echo "<script>
+            location.replace('./student.php');
+            </script>";
+        }
+        
+        if($_SESSION['core']['account_type'] == '3'){
+            echo "<script>
+            location.replace('./teacher.php');
+            </script>";
+        }
     }
 ?>
 <html>

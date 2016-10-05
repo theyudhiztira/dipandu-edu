@@ -28,6 +28,12 @@ switch ($post['proc']){
             $subject_opt="like '%'";
         }
         
+        if(!empty($post['title'])){
+            $title_opt="like '%".$post['title']."%'";
+        }else{
+            $title_opt="like '%'";
+        }
+        
         $str_subject=selectQueryDpd($dbname, "setup_subject_list", "subject_id, short_name, display_name", $conn, "");
         while($res_subject=mysql_fetch_assoc($str_subject)){
             $subject['display'][$res_subject['subject_id']]=$res_subject['display_name'];
@@ -39,7 +45,7 @@ switch ($post['proc']){
             $teacher_name[$res_teachers_name['registration_number']]=$res_teachers_name['fullname'];
         }
         
-        $get_row_data=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE  `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `subject_id` ASC");
+        $get_row_data=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE `file_display_name` ".$title_opt." AND `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `subject_id` ASC");
         $row_data=mysql_num_rows($get_row_data);
         
         
@@ -48,7 +54,7 @@ switch ($post['proc']){
             <td colspan=4 style='text-align: center;'><b style='color: red;'>NO DATA</b></td>
             </tr>";
         }else{
-            $loadData=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `file_id` ASC LIMIT ".($post['page'] - 1).", 10 ");
+            $loadData=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE `file_display_name` ".$title_opt." AND `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `file_id` ASC ");
             $no=0;
             while($res_lib=mysql_fetch_assoc($loadData)){  
                 $no+=1;

@@ -61,6 +61,8 @@ function passwordValidation(){
 
 function runSignUp(){
     registration_number = document.getElementById('registration_number').value;
+    faculty = getById("faculty");
+    faculty = faculty.options[faculty.selectedIndex].value;
     fullname = document.getElementById('fullname').value;
     username = document.getElementById('username').value;
     password = document.getElementById('password').value;
@@ -73,6 +75,16 @@ function runSignUp(){
         alert("Account type is required");
         return;
     }
+    
+    if(accountType === '3'){
+        faculty = 0;
+    }else{
+        if(faculty === ''){
+            alert("Your faculty is required");
+            return;
+        }
+    }
+        
     
     if(fullname === ''){
         alert("Your name is required");
@@ -115,7 +127,7 @@ function runSignUp(){
     }
     
     param="proc=signUp" + "&registration_number=" + registration_number + "&fullname=" + fullname + "&username=" + username;
-    param+="&password=" + password + "&email=" + email + "&account_type=" + accountType + "&captcha=" + captcha;
+    param+="&password=" + password + "&email=" + email + "&account_type=" + accountType + "&captcha=" + captcha + "&faculty=" + faculty;
     
     tujuan="do_register.php";
     
@@ -147,6 +159,17 @@ function runSignUp(){
             else {
                 error_catch(cxr.status);
             }
+        
+    }
+}
+
+function checkTeacher(){
+    accountType = document.getElementById("accountType");
+    accountType = accountType.options[accountType.selectedIndex].value;
+    
+    if(accountType === '3'){
+        getById("fakCon").innerHTML='';
+    }else{
         
     }
 }
@@ -183,7 +206,7 @@ function doLogin(){
                     var res = seplit.split("###");
                     
                     if(res[2] === '1'){
-                        nextPage='administrator.php';
+                        nextPage='admin.php';
                     }
                     
                     if(res[2] === '2'){

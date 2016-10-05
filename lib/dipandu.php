@@ -3,6 +3,8 @@
 //ini_set('display_errors', '1');
 @include_once 'config/connection.php';
 
+        date_default_timezone_set('Asia/Bangkok');
+
 //Anti SQL Injection Module
 function anti_injection_login($str){
     $safe_str=stripslashes($str);
@@ -250,6 +252,29 @@ function bulanIndonesia($bulan, $length="'S' for short format, 'L' for long form
     return $bulanJadi;
 }
 
+function bulanEnglish($bulan, $length="'S' for short format, 'L' for long format"){
+    if($length == 'S'){
+      $dpArr=array("Jan", "Feb", "Mar",
+                       "Apr", "Mei", "Jun",
+                       "Jul", "Agu", "Sep",
+                       "Okt", "Nov", "Des");  
+    }elseif ($length == 'L'){
+        $dpArr=array("January", "February", "March",
+                       "April", "May", "June",
+                       "July", "August", "September",
+                       "October", "November", "December");  
+    }else{
+        echo "<script type='javascript'>
+        alert('Errot Length Format!');
+        </script>";
+    }
+    
+    $bulanMentah=$bulan - 1;
+    $bulanJadi=$dpArr[$bulanMentah];
+    
+    return $bulanJadi;
+}
+
 
 //Pandu Yudhistira, Jakarta 21 September 2016 
 //11:32 PM Semangat untuk INDONESIA
@@ -301,5 +326,5 @@ function session_check($accountType){
             </script>";
             session_destroy();
         }
-    }        
+    }         
 }

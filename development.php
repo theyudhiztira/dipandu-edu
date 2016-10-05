@@ -8,7 +8,7 @@
     require_once 'lib/dipandu.php';
     require_once $dependencies;
     
-    session_check(2);
+    session_start();
 ?>
 <html>
     <head>
@@ -16,7 +16,7 @@
         echo dependencies();
         ?>
         <meta charset="UTF-8">
-        <title>DiPandu > E-Library : <?php echo $_SESSION['core']['username']; ?></title>
+        <title>DiPandu > Under Construction</title>
     </head>
     <body style="background-color: #3D5AFE;">
         <?php
@@ -24,7 +24,7 @@
         ?>
         <div class="row">
             <div class="col s12 m12 l12">
-                <a href="student/" style="color: #FFF;"><b><i class="fa fa-caret-left"></i> Back To Home</b></a>
+                <a href="./" style="color: #FFF;"><b><i class="fa fa-caret-left"></i> Back To Home</b></a>
             </div>
         </div>
         <div class="row">

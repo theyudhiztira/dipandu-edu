@@ -7,6 +7,7 @@
 
 include_once 'lib/dipandu.php';
 
+ini_set("display_error", 1);
 
 session_start();
 
@@ -27,10 +28,17 @@ if(!empty($post['proc'])){
             }
 
         //    echo $_SESSION['core']['username'];
-            $str_getLibrary=selectQueryDpd($dbname, "media_ebook", "*", $conn, "ORDER BY `subject_id` ASC LIMIT 0, 10");
+            $str_getLibrary=selectQueryDpd($dbname, "media_ebook", "*", $conn, "ORDER BY `subject_id` ASC");
             $no=0;
             while($res_lib=mysql_fetch_assoc($str_getLibrary)){
                 $no+=1;
+                
+                if($res_lib['file_uploader'] != $_SESSION['core']['registration_number']){
+                    $deleteBtn="";
+                }else{
+                    $deleteBtn="<a onclick=\"deleteFile('".$res_lib['file_id']."')\" class='fa fa-trash library-view-icon' title='Delete : ".$res_lib['file_display_name']."'></a>";
+                }
+                
                 if($no % 2 == 0){
                     $td_style="library-td-genap";
                 }else{
@@ -41,7 +49,7 @@ if(!empty($post['proc'])){
                     <td class='library-td'>".$teacher_name[$res_lib['file_uploader']]."</td>
                     <td class='library-td'>".$subject['short'][$res_lib['subject_id']]."</td>
                     <td class='library-td'>
-                        <a onclick=\"deleteFile('".$res_lib['file_id']."')\" class='fa fa-trash library-view-icon' title='Delete : ".$res_lib['file_display_name']."'></a>
+                        ".$deleteBtn."
                         <a href='do_library_download.php?file_id=".$res_lib['file_id']."' class='fa fa-download library-download-icon' style='margin-left: 15px;' title='Download : ".$res_lib['file_display_name']."'></a>
                         <a href='media/library/".$res_lib['file_name']."' target='_blank' class='fa fa-eye library-view-icon' title='View : ".$res_lib['file_display_name']."' style='margin-left: 15px;'></a>
                     </td> 
@@ -73,6 +81,12 @@ if(!empty($post['proc'])){
             }else{
                 $subject_opt="like '%'";
             }
+            
+            if(!empty($post['title'])){
+                $title_opt="like '%".$post['title']."%'";
+            }else{
+                $title_opt="like '%'";
+            }
 
             $str_subject=selectQueryDpd($dbname, "setup_subject_list", "subject_id, short_name, display_name", $conn, "");
             while($res_subject=mysql_fetch_assoc($str_subject)){
@@ -80,35 +94,51 @@ if(!empty($post['proc'])){
                 $subject['short'][$res_subject['subject_id']]=$res_subject['short_name'];
             }
 
+            
             $str_teacher=selectQueryDpd($dbname, "core_user", "*", $conn, "where level = '3'");
             while($res_teachers_name=mysql_fetch_assoc($str_teacher)){
                 $teacher_name[$res_teachers_name['registration_number']]=$res_teachers_name['fullname'];
             }
 
-            $get_row_data=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE  `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `subject_id` ASC");
+            $get_row_data=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE `file_display_name` ".$title_opt." AND `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `subject_id` ASC");
             $row_data=mysql_num_rows($get_row_data);
-
-
+            
+            
             if($row_data < 1){
                 $table.="<tr class='".$td_style."' title='Title : ".$res_lib['file_display_name']." ( Semester : ".$res_lib['semester']." )'>
                 <td colspan=4 style='text-align: center;'><b style='color: red;'>NO DATA</b></td>
                 </tr>";
             }else{
-                $loadData=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `file_id` ASC LIMIT ".($post['page'] - 1).", 10 ");
+                $loadData=selectQueryDpd($dbname, "media_ebook", "*", $conn, "WHERE `file_display_name` ".$title_opt." AND `file_uploader` ".$teacher." AND `subject_id` ".$subject_opt." ORDER BY `file_id` ASC LIMIT ".($post['page'] - 1).", 10 ");
                 $no=0;
                 while($res_lib=mysql_fetch_assoc($loadData)){  
+                    
                     $no+=1;
+                    
                     if($no % 2 == 0){
                         $td_style="library-td-genap";
                     }else{
                         $td_style="library-td-ganjil";
+                    }
+                    
+                    if($res_lib['file_uploader'] != $_SESSION['core']['registration_number']){
+                        $owner="display: none !important;";
+                    }else{
+                        $owner="display: inline-block !important;";
+                    }
+                    
+                    if($res_lib['file_uploader'] != $_SESSION['core']['registration_number']){
+                        $deleteBtn="";
+                    }else{
+                        $deleteBtn="<a onclick=\"deleteFile('".$res_lib['file_id']."')\" class='fa fa-trash library-view-icon' title='Delete : ".$res_lib['file_display_name']."'></a>";
                     }
                     $table.="<tr class='".$td_style."' title='Title : ".$res_lib['file_display_name']." ( Semester : ".$res_lib['semester']." )'>
                     <td>".$res_lib['file_display_name']."</td>
                     <td class='library-td'>".$teacher_name[$res_lib['file_uploader']]."</td>
                     <td class='library-td'>".$subject['short'][$res_lib['subject_id']]."</td>
                     <td class='library-td'>
-                        <a href='do_library_download.php?file_id=".$res_lib['file_id']."' class='fa fa-download library-download-icon' title='Download : ".$res_lib['file_display_name']."'></a>
+                        ".$deleteBtn."
+                        <a href='do_library_download.php?file_id=".$res_lib['file_id']."' class='fa fa-download library-download-icon' title='Download : ".$res_lib['file_display_name']."' style='margin-left: 15px;'></a>
                         <a href='media/library/".$res_lib['file_name']."' target='_blank' class='fa fa-eye library-view-icon' title='View : ".$res_lib['file_display_name']."' style='margin-left: 15px;'></a>
                     </td> 
                     </tr>";  

@@ -31,7 +31,7 @@
                 </div>
             </div>  
             <div class="col s6 m3 l3 drawer-container">
-                <div class="drawer-box waves-effect waves-light" onclick="openFile('development')" style="background-color: #e74c3c;">
+                <div class="drawer-box waves-effect waves-light" onclick="openFile('student_schedule')" style="background-color: #e74c3c;">
                     <i class="fa fa-list drawer-icon"></i><br />
                     <span class="drawer-caption">Schedules</span>
                 </div>

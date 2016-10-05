@@ -1,18 +1,6 @@
-DiPandu : Smart App
-
-Sorry if the features update is not complete.
-
-Version Update :
-v.0.0.1 - I'm forget to make features update 
-
-2 Sept 2016 :
-v.0.0.2 
-- Teacher can log in now.
-- Teacher's E-Library :
-* E-Book uploader
-* E-Book delete feature ( only available for desktop user to avoid wrong tap on mobile phone )
-
-- DiPandu Framework Update :
-* Ajax feature for sending file and text data more easily to use. ( js function : post_response_file_text() )
-* Insert query response changed to boolean value 
-* Somebug fixed especialy in javascript framework.
+$str_session=selectQueryDpd($dbname, "setup_schedule_session", "*", $conn, "ORDER BY `ses_start` ASC");
+        $no=0;
+        $session_option.="<option value=''>Session Option</option>";
+        while($res_session=mysql_fetch_assoc($str_session)){
+            $session_option.="<option value='".$res_session['ses_id']."'>".substr($res_session['ses_start'], 0, 5)." - ".substr($res_session['ses_end'], 0, 5)."</option>";
+        }

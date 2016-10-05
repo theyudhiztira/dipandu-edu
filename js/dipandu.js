@@ -217,3 +217,9 @@ function getPage(elementid, targetid, filetarget, maxperpage, dbname, process)
 function busy_off(){
     document.body.style.cursor='default';
 }
+
+function getById(elementId){
+    var res = document.getElementById(elementId);
+    
+    return res;
+}

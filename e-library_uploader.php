@@ -39,7 +39,7 @@
         ?>
         <div class="row">
             <div class="col s12 m12 l12">
-                <a href="student.php" style="color: #FFF;"><b><i class="fa fa-caret-left"></i> Back To Home</b></a>
+                <a onclick="openFile('teacher')" style="color: #FFF;"><b><i class="fa fa-caret-left"></i> Back To Home</b></a>
             </div>
         </div>
         <div class="row">
@@ -112,6 +112,10 @@
                                 ?>
                             </select>
                             <label>Subjects Name</label>
+                        </div>
+                        <div class="col s12 m12 l12 input-field">
+                            <input type="text" id="titleName" onkeyup="searchByTitle('1')" />
+                            <label>Search By Title</label>
                         </div>
                     </div>
                 </div>

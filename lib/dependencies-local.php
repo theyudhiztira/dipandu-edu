@@ -26,11 +26,12 @@ function divClose(){
 }
 
 function dependencies(){
-    echo "<link rel='icon' href='../img/ico.png'>
+    echo "<link rel='icon' href='./img/ico.png'>
       <link type='text/css' rel='stylesheet' href='css/materialize.min.css'>
       <link type='text/css' rel='stylesheet' href='css/font-awesome.min.css'>
       <link type='text/css' rel='stylesheet' href='css/dipandu.css'>
       <link type='text/css' rel='stylesheet' href='css/font-awesome-x.min.css'>
+      <link rel='stylesheet' type='text/css' href='css/sweetalert.css'>
       <!-- Seo Meta -->
       <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
       <meta name='author' content='Pandu Yudhistira' />
@@ -44,7 +45,8 @@ function dependencies(){
 function javaScriptCall(){
     echo "<script type='text/javascript' src='js/jquery.js'></script>
       <script type='text/javascript' src='js/materialize.js'></script>
-      <script type='text/javascript' src='js/dipandu.js'></script>";
+      <script type='text/javascript' src='js/dipandu.js'></script>
+      <script type='text/javascript' src='js/sweetalert.min.js'></script>";
 }
 
 function navigation_bar(){
@@ -54,7 +56,7 @@ function navigation_bar(){
                     <a class='brand-logo home-title'>DiPandu</a>
                     <a data-activates='mobile-demo' class='button-collapse'><i class='fa fa-caret-right' style='margin-left: 10px;'></i></a>
                     <ul class='right hide-on-med-and-down'>
-                        <li><a>".$_SESSION['core']['username']."<i class='fa fa-cogs'></i></a></li>
+                        <li><a>".$_SESSION['core']['username']." <i class='fa fa-cogs'></i></a></li>
                         <li onclick='openFile(\"development\")'><a><i class='fa fa-bell'></i> <span class='new badge red'>4</span></a></li>
                         <li onclick='logOut()'><a>Logout <i class='fa fa-lock'></i></a></li>
                     </ul>
